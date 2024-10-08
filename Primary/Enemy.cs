@@ -1,6 +1,5 @@
 
 using System;
-using Primary.Player; 
 namespace Primary;
     public class Enemy
     {
@@ -35,7 +34,7 @@ namespace Primary;
             
         }
         
-        public void Attack(Player enemy)
+        public void Attack(Player.Player enemy)
         {
             Random rnd = new Random();
             if (IsLiving && this.IsLiving)
