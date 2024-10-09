@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\stepan.zdansky\\.nuget\\packages\\": {}
+    "C:\\Users\\stepa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\stepan.zdansky\\Desktop\\NotSoSimpleEnemyFight\\Primary\\Primary.csproj",
+      "projectUniqueName": "C:\\Users\\stepa\\Desktop\\NotSoSimpleEnemyFight\\Primary\\Primary.csproj",
       "projectName": "Primary",
-      "projectPath": "C:\\Users\\stepan.zdansky\\Desktop\\NotSoSimpleEnemyFight\\Primary\\Primary.csproj",
-      "packagesPath": "C:\\Users\\stepan.zdansky\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\stepan.zdansky\\Desktop\\NotSoSimpleEnemyFight\\Primary\\obj\\",
+      "projectPath": "C:\\Users\\stepa\\Desktop\\NotSoSimpleEnemyFight\\Primary\\Primary.csproj",
+      "packagesPath": "C:\\Users\\stepa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stepa\\Desktop\\NotSoSimpleEnemyFight\\Primary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\stepan.zdansky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\stepa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -66,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\stepan.zdansky\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

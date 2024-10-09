@@ -8,7 +8,7 @@ namespace Primary
     {
         static void Main(string[] args)
         {
-            Enemy myOger = Enemy.Factory.CreateOger();
+            //Enemy myOger = Enemy.Factory.CreateOger();
             Enemy goblin = Enemy.Factory.CreateGoblin();
             Boss boss = Boss.FactoryBoss.CreateBoss();
             Room startRoom = Room.RoomFactory.CreateHub();
@@ -23,16 +23,17 @@ namespace Primary
             void Question()
                         {
                             Console.WriteLine("In what room would you like to go?");
-                            string move = Convert.ToString(Console.ReadLine()).ToLower();
+                            Console.WriteLine("1. Start room \n2. Treasure room \n3. Enemy room");
+                            int move = int.Parse(Console.ReadLine());
                                 switch (move)
                                 {
-                                    case "hub":
+                                    case 1:
                                         player.Move(startRoom);
                                         break;
-                                    case "treasure room":
+                                    case 2:
                                         player.Move(treasureRoom);
                                         break;
-                                    case "enemy room" :
+                                    case 3:
                                         player.Move(enemyRoom);
                                         break;
                                     default:
