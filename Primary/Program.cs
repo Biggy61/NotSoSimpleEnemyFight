@@ -10,6 +10,7 @@ namespace Primary
         {
             Enemy myOger = Enemy.Factory.CreateOger();
             Enemy goblin = Enemy.Factory.CreateGoblin();
+            Boss boss = Boss.FactoryBoss.CreateBoss();
             Room startRoom = Room.RoomFactory.CreateHub();
             Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
             Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
@@ -19,27 +20,28 @@ namespace Primary
             player.Move(enemyRoom);
             player.Heal(HealPotions.Large);
             player.GetStronger(StrenghtPotions.Creatine);
-            player.Attack(goblin);
-            goblin.Attack(player);
+            
+            
+            boss.Attack(player);
             Console.WriteLine(player);
             if (player.CurrentRoom == enemyRoom)
             {
-                
+                player.Attack(goblin);
+                goblin.Attack(player);
             }
             
-            /*
+            
             void Question()
             {
                 Console.WriteLine("In what room would you like to go?");
                 string move = Convert.ToString(Console.ReadLine()).ToLower();
-                if (player.currentRoom =! hub)
-                {
                     switch (move)
                     {
                         case "hub":
-                            player.Move(startRoom)
+                            player.Move(startRoom);
+                            break;
                     }
-                }
+                
                 switch (move)
                 {
                     
@@ -48,7 +50,7 @@ namespace Primary
             }
             
             Question();
-            */
+            
             Console.ReadLine();
             /*
             for (int i = 0; i < 10; i++)
