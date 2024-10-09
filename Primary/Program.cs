@@ -15,8 +15,7 @@ namespace Primary
             Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
             Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
             Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom);
-                goblin.Attack(player);
-                player.Attack(goblin);
+                
             
             Console.WriteLine(player);
             //player.Heal(HealPotions.Large);
@@ -47,8 +46,12 @@ namespace Primary
             //boss.Attack(player);
             if (player.CurrentRoom == enemyRoom)
             {
-                
-            
+                while (player.isLiving && goblin.isLiving)
+                {
+                     goblin.Attack(player);
+                     player.Attack(goblin);
+                }
+               
             }
             
             Console.ReadLine();
