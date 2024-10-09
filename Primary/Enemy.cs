@@ -6,17 +6,18 @@ namespace Primary;
         public string Name;
         public int Hp;
         public int BaseDmg;
-        public bool IsLiving;
+        public bool isLiving;
 
         public Enemy(string name, int hp, int baseDmg, bool isLiving)
         {
             Name = name;
             Hp = hp;
             BaseDmg = baseDmg;
-            IsLiving = isLiving;
-            if (this.Hp <= 0)
+            this.isLiving = isLiving;
+            if (Hp <= 0)
             {
-                IsLiving = false;
+                Hp = 0;
+                this.isLiving = false;
             }
         }
 
@@ -34,16 +35,28 @@ namespace Primary;
             
         }
         
-        public void Attack(Player.Player enemy)
+        public void Attack(Player.Player player)
         {
+            if (this.Hp <= 0)
+            {
+                 isLiving = false;
+                 return;
+            }
+
+            if (player.Hp <= 0)
+            {
+                player.isLiving = false;
+                return;
+            }
             Random rnd = new Random();
-            if (IsLiving && this.IsLiving)
+     
+            if (isLiving == true && player.isLiving == true)
             {
                 int rand = rnd.Next(1, 101);
                 if (rand <= 70)
                 {
-                    enemy.Hp -= BaseDmg;
-                    Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
+                    player.Hp -= BaseDmg;
+                    Console.WriteLine($"{Name} attacked {player.Name}, remaining hp: {player.Hp}");
                 }
                 else
                 {
@@ -54,5 +67,6 @@ namespace Primary;
             {
                 Console.WriteLine("He dead!");
             }
+                
         }
     }

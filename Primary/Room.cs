@@ -27,8 +27,8 @@ namespace Primary
             }
             public static Room CreateEnemyRoom()
             {
-                Enemy roomEnemy = Enemy.Factory.CreateGoblin();
-                return new Room(roomEnemy);
+                //Enemy roomEnemy = Enemy.Factory.CreateGoblin();
+                return new Room();
             }
 
             public static Room CreateTreasureRoom()

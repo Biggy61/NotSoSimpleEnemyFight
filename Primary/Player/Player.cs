@@ -8,7 +8,7 @@ namespace Primary.Player
         public string Name;
         public int Hp;
         public int Dmg;
-        public bool IsLiving;
+        public bool isLiving;
         public Room CurrentRoom;
         public Weapons weapon;
 
@@ -17,10 +17,15 @@ namespace Primary.Player
             Name = name;
             Hp = hp;
             Dmg = dmg;
-            IsLiving = isLiving;
+            this.isLiving = isLiving;
             CurrentRoom = currentRoom;
+            if (Hp <= 0)
+            {
+                Hp = 0;
+                this.isLiving = false;
+            }
         }
-        
+        /*
         public Player(string name, int hp, int dmg, bool isLiving, Room currentRoom, Weapons weapon)
         {
             Name = name;
@@ -45,7 +50,7 @@ namespace Primary.Player
             }
         }
 
-
+*/
         public void Move(Room nextRoom)
         {
             CurrentRoom = nextRoom;
@@ -53,8 +58,19 @@ namespace Primary.Player
 
         public void Attack(Enemy enemy)
         {
+            if (this.Hp <= 0)
+            {
+                isLiving = false;
+                return;
+            }
+
+            if (enemy.Hp <= 0)
+            {
+                enemy.isLiving = false;
+                return;
+            }
             Random rnd = new Random();
-            if (IsLiving && this.IsLiving)
+            if (isLiving == true && enemy.isLiving == true)
             {
             int rand = rnd.Next(1, 101);
             if (rand <= 70)
@@ -76,7 +92,7 @@ namespace Primary.Player
 
         public void Heal(HealPotions potion)
         {
-            if (!IsLiving) return;
+            if (!isLiving) return;
 
             switch (potion)
             {
@@ -95,7 +111,7 @@ namespace Primary.Player
 
         public void GetStronger(StrenghtPotions potion)
         {
-            if (!IsLiving) return;
+            if (!isLiving) return;
 
             switch (potion)
             {
@@ -113,7 +129,7 @@ namespace Primary.Player
         
         public override string ToString()
         {
-            return $"Name: {this.Name}, hp: {Hp}, dmg: {Dmg}, Alive: {IsLiving}";
+            return $"Name: {this.Name}, hp: {Hp}, dmg: {Dmg}, Alive: {isLiving}";
         }
     }
 }

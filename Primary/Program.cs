@@ -15,41 +15,41 @@ namespace Primary
             Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
             Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
             Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom);
-            Console.WriteLine(player);
-            player.Move(treasureRoom);
-            player.Move(enemyRoom);
-            player.Heal(HealPotions.Large);
-            player.GetStronger(StrenghtPotions.Creatine);
+                goblin.Attack(player);
+                player.Attack(goblin);
             
-            
-            boss.Attack(player);
             Console.WriteLine(player);
+            //player.Heal(HealPotions.Large);
+            //player.GetStronger(StrenghtPotions.Creatine);
+            void Question()
+                        {
+                            Console.WriteLine("In what room would you like to go?");
+                            string move = Convert.ToString(Console.ReadLine()).ToLower();
+                                switch (move)
+                                {
+                                    case "hub":
+                                        player.Move(startRoom);
+                                        break;
+                                    case "treasure room":
+                                        player.Move(treasureRoom);
+                                        break;
+                                    case "enemy room" :
+                                        player.Move(enemyRoom);
+                                        break;
+                                    default:
+                                        player.Move(startRoom);
+                                        break;
+                                }
+                            
+                                
+                        }
+            Question();
+            //boss.Attack(player);
             if (player.CurrentRoom == enemyRoom)
             {
-                player.Attack(goblin);
-                goblin.Attack(player);
-            }
-            
-            
-            void Question()
-            {
-                Console.WriteLine("In what room would you like to go?");
-                string move = Convert.ToString(Console.ReadLine()).ToLower();
-                    switch (move)
-                    {
-                        case "hub":
-                            player.Move(startRoom);
-                            break;
-                    }
                 
-                switch (move)
-                {
-                    
-                }
-                
-            }
             
-            Question();
+            }
             
             Console.ReadLine();
             /*
