@@ -10,53 +10,33 @@ namespace Primary.Player
         public int Dmg;
         public bool isLiving;
         public Room CurrentRoom;
-        public Weapons weapon;
-
-        public Player(string name, int hp, int dmg, bool isLiving, Room currentRoom)
+        public Weapons Weapon;
+        
+        public Player(string name, int hp, int dmg, bool isLiving, Room currentRoom, Weapons weapon)
         {
             Name = name;
             Hp = hp;
             Dmg = dmg;
             this.isLiving = isLiving;
             CurrentRoom = currentRoom;
+            Weapon = weapon;
             if (Hp <= 0)
             {
                 Hp = 0;
                 this.isLiving = false;
             }
         }
-        /*
-        public Player(string name, int hp, int dmg, bool isLiving, Room currentRoom, Weapons weapon)
-        {
-            Name = name;
-            Hp = hp;
-            Dmg = dmg;
-            IsLiving = isLiving;
-            CurrentRoom = currentRoom;
-            
-            switch (weapon)
-            {
-                case Weapons.Dagger:
-                    Dmg += 5;
-                    break;
-                case Weapons.Sword:
-                    Dmg += 10;
-                    break;
-                case Weapons.Glock:
-                    Dmg += 15;
-                    break;
-                default:
-                    break;
-            }
-        }
 
-*/
+        public void SetWeapon(Weapons weapon)
+        {
+            Weapon = weapon;
+        }
         public void Move(Room nextRoom)
         {
             CurrentRoom = nextRoom;
         }
 
-        public void Attack(Enemy enemy)
+        public void Attack(Enemy.Enemy enemy)
         {
             if (this.Hp <= 0)
             {
@@ -75,7 +55,7 @@ namespace Primary.Player
             int rand = rnd.Next(1, 101);
             if (rand <= 70)
             {
-                enemy.Hp -= Dmg;
+                enemy.Hp -= Dmg + (int) Weapon;
                 Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
             }
             else
@@ -96,13 +76,13 @@ namespace Primary.Player
 
             switch (potion)
             {
-                case HealPotions.Small: Hp += 5;
+                case HealPotions.Small: Hp += 10;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
-                case HealPotions.Mid: Hp += 10;
+                case HealPotions.Mid: Hp += 20;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
-                case HealPotions.Large: Hp += 15;
+                case HealPotions.Large: Hp += 30;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
 
@@ -115,13 +95,13 @@ namespace Primary.Player
 
             switch (potion)
             {
-                case StrenghtPotions.Redbull: Dmg += 2;
+                case StrenghtPotions.Redbull: Dmg += 5;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Creatine: Dmg += 5;
+                case StrenghtPotions.Creatine: Dmg += 10;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Steroids: Dmg += 10;
+                case StrenghtPotions.Steroids: Dmg += 20;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
             }

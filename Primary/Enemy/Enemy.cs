@@ -1,6 +1,6 @@
 
 using System;
-namespace Primary;
+namespace Primary.Enemy;
     public class Enemy
     {
         public string Name;
@@ -23,11 +23,6 @@ namespace Primary;
 
         public static class Factory
         {
-            public static Enemy CreateOger()
-            {
-                return new Enemy("Oger", 50, 5, true);
-            }
-
             public static Enemy CreateGoblin()
             {
                 return new Enemy("Goblin", 50, 7, true);

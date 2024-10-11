@@ -1,6 +1,6 @@
 namespace Primary;
 
-public class Boss : Enemy
+public class Boss : Enemy.Enemy
 {
     public Boss(string name, int hp, int baseDmg, bool isLiving) : base(name, hp, baseDmg, isLiving)
     {

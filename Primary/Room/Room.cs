@@ -2,14 +2,14 @@ namespace Primary
 {
     public class Room
     {
-        private Enemy _enemy;
+        private Enemy.Enemy _enemy;
         private string Treasure;
         public int RoomID;
         public Room()
         {
             
         }
-        public Room(Enemy enemy)
+        public Room(Enemy.Enemy enemy)
         {
             _enemy = enemy;
         }

@@ -8,31 +8,30 @@ namespace Primary
     {
         static void Main(string[] args)
         {
-            //Enemy myOger = Enemy.Factory.CreateOger();
-            Enemy goblin = Enemy.Factory.CreateGoblin();
+            
+            Enemy.Enemy goblin = Enemy.Enemy.Factory.CreateGoblin();
             Boss boss = Boss.FactoryBoss.CreateBoss();
             Room startRoom = Room.RoomFactory.CreateHub();
             Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
             Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
-            Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom);
+            Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom, Weapons.Hand);
             Console.WriteLine("Welcome! In this game the objective is to kill the boss. There are 3 Rooms start room, treasure room and enemy room.");
             Console.WriteLine("If u attack an enemy there is 70% chance he dodges the attack. This goes both ways");
             Console.WriteLine("Your character: " + player);
-            //player.Heal(HealPotions.Large);
-            //player.GetStronger(StrenghtPotions.Creatine);
-            void Question()
+            void Move()
                         {
-                            Console.WriteLine("In what room would you like to go?");
+                            Console.WriteLine("In what room would you like to go? \n");
                             Console.WriteLine("1. Start room \n2. Treasure room \n3. Enemy room");
                             int move = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-                                switch (move)
+                     
+                            switch (move)
                                 {
                                     case 1:
                                         player.Move(startRoom);
                                         break;
                                     case 2:
                                         player.Move(treasureRoom);
-                                        Console.WriteLine(Room.RoomFactory.CreateTreasureRoom());
+                                        //Console.WriteLine(Room.RoomFactory.CreateTreasureRoom());
                                         break;
                                     case 3:
                                         player.Move(enemyRoom);
@@ -47,7 +46,7 @@ namespace Primary
                         }
             void Fight()
                         {
-                            Console.WriteLine("In this room is a enemy do you want to fight him or leave?");
+                            Console.WriteLine("In this room is a enemy do you want to fight him or leave? \n");
                             Console.WriteLine("1. Fight \n2. Leave");
                             int move = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
                             switch (move)
@@ -58,7 +57,11 @@ namespace Primary
                                         goblin.Attack(player);
                                         player.Attack(goblin);
                                     }
-                                    Question();
+                                    if (goblin.isLiving == false)
+                                    {
+                                        Upgrade();
+                                        Move();
+                                    }
                                     break;
                                 case 2:
                                     player.Move(startRoom);
@@ -77,13 +80,13 @@ namespace Primary
                 switch (upgrade)
                 {
                     case 1:
-                        Actions.Weapon(player);
+                        Upgrades.Weapon(player);
                         break;
                     case 2:
-                        Actions.Heal(player);
+                        Upgrades.Heal(player);
                         break;
                     case 3:
-                        Actions.StrenghtUpgrade(player);
+                        Upgrades.StrenghtUpgrade(player);
                         break;
                     default:
                         break;
@@ -97,7 +100,7 @@ namespace Primary
                 Console.WriteLine("");
                 int treasure = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
                 switch (treasure)
-                { 
+                {
                     case 1:
                         int rand = rnd.Next(1, 101);
                         if (rand <= 60)
@@ -108,12 +111,17 @@ namespace Primary
                         {
                             
                         }
+                        break;
+                    
+                    default:
+                        break;
                         
                 }
             }
            
-            Question();
+            Move();
             Console.ReadLine();
         } 
     }
 }
+

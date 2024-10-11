@@ -1,17 +1,27 @@
 namespace Primary.Player;
 
-public class Actions
+public class Upgrades
 {
     public static void Weapon(Player player)
     {
-        
         Random rnd  = new Random();
         int rand = rnd.Next(1, 100);
-        if (rand <=33)
+        if (rand <= 33)
         {
-            Weapons.Dagger;
-        } 
-        player.Dmg += ;
+            player.SetWeapon(Weapons.Dagger);
+        }
+        
+        if (rand is < 33 and <= 66)
+        {
+            player.SetWeapon(Weapons.Sword);
+        }
+        
+        if (rand is < 66 and <= 100)
+        {
+            player.SetWeapon(Weapons.Glock);
+        }
+        
+        
     }
 
     public static void Heal(Player player)

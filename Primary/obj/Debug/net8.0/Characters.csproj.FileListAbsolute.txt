@@ -1,0 +1,5 @@
+C:\Users\stepa\Desktop\NotSoSimpleEnemyFight\Characters\obj\Debug\net8.0\Characters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\stepa\Desktop\NotSoSimpleEnemyFight\Characters\obj\Debug\net8.0\Characters.AssemblyInfoInputs.cache
+C:\Users\stepa\Desktop\NotSoSimpleEnemyFight\Characters\obj\Debug\net8.0\Characters.AssemblyInfo.cs
+C:\Users\stepa\Desktop\NotSoSimpleEnemyFight\Characters\obj\Debug\net8.0\Characters.csproj.CoreCompileInputs.cache
+C:\Users\stepa\Desktop\NotSoSimpleEnemyFight\Characters\obj\Debug\net8.0\Characters.sourcelink.json
