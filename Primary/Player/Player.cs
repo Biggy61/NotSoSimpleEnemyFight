@@ -55,8 +55,10 @@ namespace Primary.Player
             int rand = rnd.Next(1, 101);
             if (rand <= 70)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 enemy.Hp -= Dmg + (int) Weapon;
                 Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {

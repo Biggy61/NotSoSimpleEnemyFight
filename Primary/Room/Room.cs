@@ -4,7 +4,6 @@ namespace Primary
     {
         private Enemy.Enemy _enemy;
         private string Treasure;
-        public int RoomID;
         public Room()
         {
             
@@ -35,6 +34,12 @@ namespace Primary
             {
                 string treasure = "Hey this is a treasure!";
                 return new Room(treasure);
+            }
+
+            public static Room CreateBossRoom()
+            {
+                
+                return new Room();
             }
             
         }

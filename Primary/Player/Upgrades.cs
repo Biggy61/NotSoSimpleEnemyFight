@@ -11,12 +11,12 @@ public class Upgrades
             player.SetWeapon(Weapons.Dagger);
         }
         
-        if (rand is < 33 and <= 66)
+        if (rand is > 33 and <= 66)
         {
             player.SetWeapon(Weapons.Sword);
         }
         
-        if (rand is < 66 and <= 100)
+        if (rand is > 66 and <= 100)
         {
             player.SetWeapon(Weapons.Glock);
         }
@@ -32,12 +32,12 @@ public class Upgrades
         {
             player.Heal(HealPotions.Small);
         }
-        if (rand is < 33 and <= 66)
+        if (rand is > 33 and <= 66)
         {
             player.Heal(HealPotions.Mid);
         }
 
-        if (rand is < 66 and <= 100)
+        if (rand is > 66 and <= 100)
         {
             player.Heal(HealPotions.Large);
         }
@@ -51,12 +51,12 @@ public class Upgrades
         {
             player.GetStronger(StrenghtPotions.Redbull);
         }
-        if (rand is < 33 and <= 66)
+        if (rand is > 33 and <= 66)
         {
             player.GetStronger(StrenghtPotions.Creatine);
         }
 
-        if (rand is < 66 and <= 100)
+        if (rand is > 66 and <= 100)
         {
             player.GetStronger(StrenghtPotions.Steroids);
         }

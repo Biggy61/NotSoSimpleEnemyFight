@@ -4,20 +4,21 @@ namespace Primary;
 
 public class Functions
 {
-    public static Enemy.Enemy skeleton = Enemy.Enemy.Factory.CreateSkeleton();
-    public static Boss boss = Boss.FactoryBoss.CreateBoss();
+    public static Enemy.Enemy Boss = Enemy.Enemy.Factory.CreateBoss();
     public static Room startRoom = Room.RoomFactory.CreateHub();
     public static Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
-    public static Enemy.Enemy goblin = Enemy.Enemy.Factory.CreateGoblin();
     public static Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
+    public static Room bossRoom = Room.RoomFactory.CreateBossRoom();
+    public static Enemy.Enemy goblin = Enemy.Enemy.Factory.CreateGoblin();
+    public static Enemy.Enemy skeleton = Enemy.Enemy.Factory.CreateSkeleton();
     public static Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom, Weapons.Hand);
     public static int count = 0;
     public void Move()
                         {
                             Console.ForegroundColor = ConsoleColor.DarkBlue;
-                            Console.WriteLine("In what room would you like to go? \n");
-                            Console.WriteLine("1. Start room \n2. Treasure room \n3. Enemy room");
-                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.WriteLine("In what room would you like to go?");
+                            Console.WriteLine("1. Start room \n2. Treasure room \n3. Enemy room \n4. Final boss");
+                            Console.ForegroundColor = ConsoleColor.White;
                             int move = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
                      
                             switch (move)
@@ -42,6 +43,17 @@ public class Functions
                                         player.Move(enemyRoom);
                                         Fight(goblin);
                                         break;
+                                    case 4:
+                                        if (goblin.isLiving == false && count > 0)
+                                        {
+                                        player.Move(bossRoom);
+                                        Fight(Boss);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You have to kill the enemy and collect the treasure first.");
+                                        }
+                                        break;
                                     default:
                                         player.Move(startRoom);
                                         break;
@@ -52,9 +64,12 @@ public class Functions
             //--------------- FIGHT ---------------
             public void Fight(Enemy.Enemy enemy)
             {
-                            Console.WriteLine($"There is an enemy!!\n {enemy} Do you want to fight him or leave? ");
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine($"There is an enemy!!\n{enemy} Do you want to fight him or leave? ");
                             Console.WriteLine("1. Fight \n2. Leave");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
                             int move = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+                            Console.ForegroundColor = ConsoleColor.White;
                             switch (move)
                             {
                                 case 1:
@@ -80,9 +95,12 @@ public class Functions
             //--------------- UPGRADE ---------------
             public void Upgrade()
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Congratulations! U have gotten an upgrade.");
                 Console.WriteLine("Select which type of upgrade you want: \n1.Weapons \n2.Heal \n3.Strenght Potion");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 int upgrade = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+                Console.ForegroundColor = ConsoleColor.White;
                 switch (upgrade)
                 {
                     case 1:
@@ -105,8 +123,13 @@ public class Functions
                 if (count == 0)
                 {
                    Random rnd = new Random();
+                                   Console.ForegroundColor = ConsoleColor.White;
                                    Console.WriteLine("OMG! there is a chest do you want to open it?");
-                                   Console.WriteLine("1. YES!!! 2. No, leave");
+                                   Console.ForegroundColor = ConsoleColor.Green;
+                                   Console.WriteLine("1. YES!!!");
+                                   Console.ForegroundColor = ConsoleColor.Red;
+                                   Console.WriteLine("2. No, leave");
+                                   Console.ForegroundColor = ConsoleColor.White;
                                    int treasure = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
                                    switch (treasure)
                                    {
@@ -128,12 +151,14 @@ public class Functions
                                        default:
                                            break;
                                    }
-
+                                   count++;
                                    
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You have already got the treasure.");
-                }count++;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
 }

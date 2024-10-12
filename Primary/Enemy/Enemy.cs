@@ -32,6 +32,11 @@ namespace Primary.Enemy;
             {
                 return new Enemy("Skeleton", 50, 7, true);
             }
+
+            public static Enemy CreateBoss()
+            {
+                return new Enemy("Wenceslas Rich", 150, 10, true);
+            } 
         }
         
         public void Attack(Player.Player player)
@@ -54,8 +59,10 @@ namespace Primary.Enemy;
                 int rand = rnd.Next(1, 101);
                 if (rand <= 70)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     player.Hp -= BaseDmg;
                     Console.WriteLine($"{Name} attacked {player.Name}, remaining hp: {player.Hp}");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
