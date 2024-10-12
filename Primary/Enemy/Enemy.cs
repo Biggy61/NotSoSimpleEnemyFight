@@ -25,9 +25,13 @@ namespace Primary.Enemy;
         {
             public static Enemy CreateGoblin()
             {
-                return new Enemy("Goblin", 50, 7, true);
+                return new Enemy("Goblin", 100, 10, true);
             }
-            
+
+            public static Enemy CreateSkeleton()
+            {
+                return new Enemy("Skeleton", 50, 7, true);
+            }
         }
         
         public void Attack(Player.Player player)
@@ -55,7 +59,7 @@ namespace Primary.Enemy;
                 }
                 else
                 {
-                    Console.WriteLine("Enemy dodged!");
+                    Console.WriteLine("Player dodged!");
                 }
             }
             else
@@ -63,5 +67,10 @@ namespace Primary.Enemy;
                 Console.WriteLine("He dead!");
             }
                 
+            
+        }
+        public override string ToString()
+        {
+            return $"Name: {this.Name}, hp: {Hp}, dmg: {BaseDmg}, Alive: {isLiving}";
         }
     }

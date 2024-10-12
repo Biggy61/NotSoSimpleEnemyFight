@@ -11,7 +11,5 @@ public class Boss : Enemy.Enemy
         {
             return new Boss("Boss", 250, 15, true);
         }
-        
-            
     }
 }

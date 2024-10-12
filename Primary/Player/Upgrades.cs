@@ -27,7 +27,7 @@ public class Upgrades
     public static void Heal(Player player)
     {
         Random rnd  = new Random();
-        int rand = rnd.Next(1, 100);
+        int rand = rnd.Next(1, 101);
         if (rand <= 33)
         {
             player.Heal(HealPotions.Small);
