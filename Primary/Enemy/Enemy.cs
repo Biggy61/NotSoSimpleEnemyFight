@@ -14,11 +14,6 @@ namespace Primary.Enemy;
             Hp = hp;
             BaseDmg = baseDmg;
             this.isLiving = isLiving;
-            if (Hp <= 0)
-            {
-                Hp = 0;
-                this.isLiving = false;
-            }
         }
 
         public static class Factory

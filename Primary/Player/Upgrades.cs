@@ -9,16 +9,19 @@ public class Upgrades
         if (rand <= 33)
         {
             player.SetWeapon(Weapons.Dagger);
+            Console.WriteLine(player.Name + " has a weapon now! His weapon: Dagger");
         }
         
         if (rand is > 33 and <= 66)
         {
             player.SetWeapon(Weapons.Sword);
+            Console.WriteLine(player.Name + " has a weapon now! His weapon: Sword");
         }
         
         if (rand is > 66 and <= 100)
         {
             player.SetWeapon(Weapons.Glock);
+            Console.WriteLine(player.Name + " has a weapon now! His weapon: Glock");
         }
         
         

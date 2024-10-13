@@ -57,6 +57,10 @@ namespace Primary.Player
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 enemy.Hp -= Dmg + (int) Weapon;
+                if (enemy.Hp < 0)
+                {
+                    enemy.Hp = 0;
+                }
                 Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
                 Console.ForegroundColor = ConsoleColor.White;
             }
@@ -65,10 +69,7 @@ namespace Primary.Player
                 Console.WriteLine("Enemy dodged!");
             }
             }
-            else
-            {
-                Console.WriteLine("He dead!");
-            }
+           
         }
 
 

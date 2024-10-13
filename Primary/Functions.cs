@@ -1,9 +1,11 @@
+using System.Threading.Channels;
 using Primary.Player;
 
 namespace Primary;
 
 public class Functions
 {
+    private static string _charName = Console.ReadLine() ?? throw new InvalidOperationException(); 
     public static Enemy.Enemy Boss = Enemy.Enemy.Factory.CreateBoss();
     public static Room startRoom = Room.RoomFactory.CreateHub();
     public static Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
@@ -11,8 +13,11 @@ public class Functions
     public static Room bossRoom = Room.RoomFactory.CreateBossRoom();
     public static Enemy.Enemy goblin = Enemy.Enemy.Factory.CreateGoblin();
     public static Enemy.Enemy skeleton = Enemy.Enemy.Factory.CreateSkeleton();
-    public static Player.Player player = new Player.Player("Pavel", 200, 10, true, startRoom, Weapons.Hand);
-    public static int count = 0;
+    public static Player.Player player = new Player.Player(_charName, 200, 10, true, startRoom, Weapons.Hand);
+    public bool TreasureCount = true;
+
+    
+    
     public void Move()
                         {
                             Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -25,6 +30,7 @@ public class Functions
                                 {
                                     case 1:
                                         player.Move(startRoom);
+                                        Move();
                                         break;
                                     case 2:
                                         if (goblin.isLiving == false)
@@ -35,23 +41,37 @@ public class Functions
                                         }
                                         else
                                         {
+                                            Console.ForegroundColor = ConsoleColor.Red;
                                             Console.WriteLine("You have to get through the enemy first ");
+                                            Console.ForegroundColor = ConsoleColor.White;
                                             Move();
                                         }
                                         break;
                                     case 3:
                                         player.Move(enemyRoom);
-                                        Fight(goblin);
+                                        if (goblin.isLiving == true)
+                                        {
+                                            Fight(goblin);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You have already killed the enemy");
+                                            Move();
+                                        }
+                                        
                                         break;
                                     case 4:
-                                        if (goblin.isLiving == false && count > 0)
+                                        if (goblin.isLiving == false && TreasureCount == false)
                                         {
                                         player.Move(bossRoom);
                                         Fight(Boss);
                                         }
                                         else
                                         {
+                                            Console.ForegroundColor = ConsoleColor.Red;
                                             Console.WriteLine("You have to kill the enemy and collect the treasure first.");
+                                            Console.ForegroundColor = ConsoleColor.White;
+                                            Move();
                                         }
                                         break;
                                     default:
@@ -64,6 +84,7 @@ public class Functions
             //--------------- FIGHT ---------------
             public void Fight(Enemy.Enemy enemy)
             {
+                
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine($"There is an enemy!!\n{enemy} Do you want to fight him or leave? ");
                             Console.WriteLine("1. Fight \n2. Leave");
@@ -78,14 +99,38 @@ public class Functions
                                         enemy.Attack(player);
                                         player.Attack(enemy);
                                     }
-                                    if (enemy.isLiving == false)
+                                    if (player.CurrentRoom == enemyRoom)
                                     {
-                                        Upgrade();
-                                        Move();
+                                        if (enemy.isLiving == false && player.isLiving == true)
+                                        {
+                                            Upgrade();
+                                            Move();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You lost :(");
+                                        }
                                     }
+                                    if (player.CurrentRoom == bossRoom)
+                                    {
+                                        if (enemy == Boss)
+                                        {
+                                            if (Boss.isLiving == false && player.isLiving == true)
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("You have won!!!");
+                                                Console.ForegroundColor = ConsoleColor.White;
+                                                Console.WriteLine("...............   .......... . ..... . ........................................ \n ............... . ..........   .....   ........................................ \n ...............   ...............   ..   ....................   ............... \n ................................. . .. . .................... . ............... \n .................................   .    ....................   ............... \n .....   ................   ...... .   .. ...................................... \n ..... . ................ . ......  .     .....   ........................   ... \n .....   ...........        ...... .  ......... . ........................ . ... \n ..........   ...                    ..........   ........................   ... \n ...   .... . ... .  @  =                ....................................... \n ... . ....          @@@@@@@@@@@@@%        ............   ...................... \n ...   .......      @@@@%@++@@@@@@@@@@:       ......... . ..   ................. \n ..........      @@@@@@@@@@@@@+*@@@@@@@@@@##    .......   .. . ................. \n .........    #@@@@@@#@@@@@@@@@@@@+-=*  @@@@@   ............   ............   .. \n .......      @@@-#+#=@@@@%@@@@@@@@@@@#@@: .@   ........................... . .. \n .......    @@@#@@#@@@@@@@@@*#@@@@@@@@@@#@@@@@  ...........................      \n .....     @@@@@@@@*        .#@@- @@@-@@-@@+@@  ............................. .  \n ..... .  %@#@%@@                          *@#+  ............................    \n .....    @@@@@@+ :.:...                    =*@  ............................... \n .....    @@%*@%  =::.:.     ..              =@  ............................... \n .....    @@@@@::.#+:.   ....                 @+ ............................... \n .......  %@*@# :.-:::-.:...                  %+ ............................... \n .......  @@@#%*:--=                          @: ....   ........................ \n .......  @@@@@@*--=                          @  .... . ........................ \n ........ :@@%@@@-.  @@@@@@@@%@     @@@@@@@@  @  ....   ........................ \n .......  #@@#+@   @@@@** :--+*            %@ @                     .   ........ \n ......    @@@=@@@@@   -@+%#%@@*    %@@@@@= @#                        . .......  \n ......  @@.@@@@   @ @@  @  *: @@@@@  =@  @  @%@-      =@@@@@@%.        ...   .  \n   ....  @:   @@   @ ::..+@**  @   @         : @  -@@@@@@@@@@@@@@@@-    ... . .  \n .    .  +* @.:  : @          @    @          @ -%@@@@@@@@@@@@@@@@@@+   ...   .. \n    . ..  @:@  # =  @@@:    +@@     @        @  *@@@@@@#@@%#=+@@@@@:    ........ \n -... ..   +  @@ *.     :-+.@         :@@@@      @@@-    =*    .@@@@:   ........ \n .         +    =:=:.. :    =@@@@@%@          .*@@@@        ::   @@%.        ... \n   @@%   :@@@@@ * +-.         =       ..    .   +@@@@%-     :=.                  \n @@@@%@@@@@@*@@@= :=:+.                .   ..       +-    .....    %@@*-=#%-::.  \n #  @@*.%@@@+*@@ @   =. . %@@*@%@%@@@. .. ..       -@*:.::.     @@@*:   -*   ..  \n@@@+ .@+ =*-=#@@ @*. ..     +   *    * .          :+@@@@-           :..*@@*  .:- \n :@@@#.@@*:*@%@@ :@#.:-. .. +@+   -       @@         -@=    ..             :=+   \n-: + @# @#:+=*@@: =@@=-=  -.-@@@@%.:..   %#@+@@@@@=         ...   ..        -@@= \n @@.-*%--@@:+-@@=..-@@#=:              @@-.= @@+:* -@@*       ............       \n @-@   =@-@:=+:@%  :-%@@@@.           @@@ .+ @@  % +@##+@@:      ..........      \n :+*@@   *#@=+ @@:  :=*%@@@@#=:  .:% @:@- @: @% :@ -#=#  @@::     ............ : \n # :-@@#   %@*:=@@.  -=+=:+@@@@@@@.  @@@. @ @@  @@  @-+  @@. @@*        ......   \n %=   %@@=  +@@-:@# . ---++.        %@@  @: @-  @@  @*:  @@= @-@   ...    ....   \n +%%+   @@@   @@@:@--. :*%@@@@-:    @@  @  @%  @@*  +@= :@%: =*@ %          ..   \n -@@@%   +@@@  .+@@@   .          %@@  @@  @: .@@ : ==  +@%-  @* @@ :++=::.    . \n %% @@@%. #@@@@=   @@@-+:        @@@   :@% @  =@#.: *@+=@@-. #@  @@+     .  .. . \n  *%@@@#    @@ -#@         .-+:%@@#     @@ @ :=@#*=.:+ =@@+: @+- @*#        .  . \n   @  %*=    @   @@@:          @@     :@@@ @ %=*@+ :=#-#@== @@=.=@+=@ =-         \n    @   ...   :   @ @@@@  -@=@  @  @@@@@@@ - =+++#-: #.@@%  @=-.:=-*@: #-  ::    \n    #=   :        @     @@@  +:+:%-++.:**@  --=:+.%*:=%%#*  @ + :*.+@# %:#     . \n     @  ..-:.     %          .= .: .=@+. @@ %=%#++.-=+*@*@ @@+. -#=@@: #++-+@.   \n  -  .%   . .     :    .      @.%*  #.*  @#.+-..=-#+++#%.- @*==+@*#@++ = .   @@  \n      :+   .-.    .    :-#*=*=@*-*  *#+  @% *::=.*= *+#**+ @-+%%**@#:..:.=% +@*: \n .%%-+:*     :#@@-@@+@#@@@%:@ @+ # .@-+ :.@ *@-:# ::%@@*:. @.**.%@+=-#@@@.**@#=* \n #@@@@@#@  .*@@@@ .*#*      - @--* .-   %-@ @-::# *+#*=*-. @=*#@+=%*++  #+@%.  + \n @@+   :%*:@@@@+*  #          @*.:+ :+.@@++ ##:.+..+*=.+= -@-=#+*@:- .@#@=:.:@@@ \n #+                .                                      :%.==  -        : ");
+                                            }  
+                                        }
+                                    }
+                                    
+                                    
+                                    
                                     break;
                                 case 2:
                                     player.Move(startRoom);
+                                    Move();
                                     break;
                                 default:
                                     player.Move(startRoom);
@@ -120,7 +165,7 @@ public class Functions
             //--------------- TREASURE ---------------
             public void Treasure()
             {
-                if (count == 0)
+                if (TreasureCount == true)
                 {
                    Random rnd = new Random();
                                    Console.ForegroundColor = ConsoleColor.White;
@@ -139,25 +184,29 @@ public class Functions
                                            if (rand <= 60)
                                            {
                                                Upgrade();
+                                               TreasureCount = false;
                                            }
                                            else
                                            {
+                                               Console.WriteLine("Oh no it was a trap");
                                                Fight(skeleton);
+                                               TreasureCount = false;
                                            }
                                            break;
                                        case 2:
                                            player.Move(startRoom);
+                                           TreasureCount = true;
                                            break;
                                        default:
                                            break;
                                    }
-                                   count++;
+                                   
                                    
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You have already got the treasure.");
+                    Console.WriteLine("You have already opened the chest.");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
