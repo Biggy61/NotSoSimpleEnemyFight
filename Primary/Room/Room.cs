@@ -2,16 +2,26 @@ namespace Primary
 {
     public class Room
     {
-        public Enemy.Enemy Enemy;
-        public static string Treasure;
+        public Enemy.Enemy EnemyEntity
+        {
+            get;
+            private set;
+        }
 
-        public Room()
+        public string Treasure
+        {
+            get;
+            private set;
+        }
+        
+        public Room() 
         {
             
         }
+        
         public Room(Enemy.Enemy enemy)
         {
-            Enemy = enemy;
+            EnemyEntity = enemy;
         }
         public Room(string treasure)
         {
@@ -26,12 +36,13 @@ namespace Primary
             }
             public static Room CreateEnemyRoom()
             {
-                return new Room();
+                Enemy.Enemy enemy = Enemy.Enemy.Factory.CreateGoblin();
+                return new Room(enemy);
             }
 
             public static Room CreateTreasureRoom()
             {
-                
+                //string treasure = "treasure";
                 return new Room();
             }
 

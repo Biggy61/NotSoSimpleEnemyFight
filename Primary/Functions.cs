@@ -11,11 +11,10 @@ public class Functions
     public static Room enemyRoom = Room.RoomFactory.CreateEnemyRoom();
     public static Room treasureRoom = Room.RoomFactory.CreateTreasureRoom();
     public static Room bossRoom = Room.RoomFactory.CreateBossRoom();
-    public static Enemy.Enemy goblin = Enemy.Enemy.Factory.CreateGoblin();
+    public static Enemy.Enemy goblin = enemyRoom.EnemyEntity;
     public static Enemy.Enemy skeleton = Enemy.Enemy.Factory.CreateSkeleton();
     public static Player.Player player = new Player.Player(_charName, 200, 10, true, startRoom, Weapons.Hand);
     public bool TreasureCount = true;
-
     
     
     public void Move()

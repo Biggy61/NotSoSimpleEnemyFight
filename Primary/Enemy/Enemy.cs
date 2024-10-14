@@ -15,7 +15,7 @@ namespace Primary.Enemy;
             BaseDmg = baseDmg;
             this.isLiving = isLiving;
         }
-
+        
         public static class Factory
         {
             public static Enemy CreateGoblin()
