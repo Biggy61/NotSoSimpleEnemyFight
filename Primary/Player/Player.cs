@@ -1,4 +1,3 @@
-
 using System;
 
 namespace Primary.Player
@@ -11,7 +10,7 @@ namespace Primary.Player
         public bool isLiving;
         public Room CurrentRoom;
         public Weapons Weapon;
-        
+
         public Player(string name, int hp, int dmg, bool isLiving, Room currentRoom, Weapons weapon)
         {
             Name = name;
@@ -31,6 +30,7 @@ namespace Primary.Player
         {
             Weapon = weapon;
         }
+
         public void Move(Room nextRoom)
         {
             CurrentRoom = nextRoom;
@@ -49,27 +49,28 @@ namespace Primary.Player
                 enemy.isLiving = false;
                 return;
             }
+
             Random rnd = new Random();
             if (isLiving == true && enemy.isLiving == true)
             {
-            int rand = rnd.Next(1, 101);
-            if (rand <= 70)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                enemy.Hp -= Dmg + (int) Weapon;
-                if (enemy.Hp < 0)
+                int rand = rnd.Next(1, 101);
+                if (rand <= 70)
                 {
-                    enemy.Hp = 0;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    enemy.Hp -= Dmg + (int)Weapon;
+                    if (enemy.Hp < 0)
+                    {
+                        enemy.Hp = 0;
+                    }
+
+                    Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
-                Console.WriteLine($"{Name} attacked {enemy.Name}, remaining hp: {enemy.Hp}");
-                Console.ForegroundColor = ConsoleColor.White;
+                else
+                {
+                    Console.WriteLine("Enemy dodged!");
+                }
             }
-            else
-            {
-                Console.WriteLine("Enemy dodged!");
-            }
-            }
-           
         }
 
 
@@ -79,16 +80,18 @@ namespace Primary.Player
 
             switch (potion)
             {
-                case HealPotions.Small: Hp += 10;
+                case HealPotions.Small:
+                    Hp += 10;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
-                case HealPotions.Mid: Hp += 20;
+                case HealPotions.Mid:
+                    Hp += 20;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
-                case HealPotions.Large: Hp += 30;
+                case HealPotions.Large:
+                    Hp += 30;
                     Console.WriteLine($"{Name} healed, remaining hp: {Hp}");
                     break;
-
             }
         }
 
@@ -98,18 +101,21 @@ namespace Primary.Player
 
             switch (potion)
             {
-                case StrenghtPotions.Redbull: Dmg += 5;
+                case StrenghtPotions.Redbull:
+                    Dmg += 5;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Creatine: Dmg += 10;
+                case StrenghtPotions.Creatine:
+                    Dmg += 10;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Steroids: Dmg += 20;
+                case StrenghtPotions.Steroids:
+                    Dmg += 20;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
             }
         }
-        
+
         public override string ToString()
         {
             return $"Name: {this.Name}, hp: {Hp}, dmg: {Dmg}, Alive: {isLiving}";

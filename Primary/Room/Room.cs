@@ -23,10 +23,6 @@ namespace Primary
         {
             EnemyEntity = enemy;
         }
-        public Room(string treasure)
-        {
-            Treasure = treasure;
-        }
 
         public static class RoomFactory
         {
@@ -42,7 +38,6 @@ namespace Primary
 
             public static Room CreateTreasureRoom()
             {
-                //string treasure = "treasure";
                 return new Room();
             }
 

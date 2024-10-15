@@ -1,78 +1,94 @@
-
 using System;
+
 namespace Primary.Enemy;
-    public class Enemy
+
+public class Enemy
+{
+    public string Name;
+    public int Hp;
+    public int MaxHp;
+    public int BaseDmg;
+    public bool isLiving;
+
+    public Enemy(string name, int hp, int baseDmg, bool isLiving)
     {
-        public string Name;
-        public int Hp;
-        public int BaseDmg;
-        public bool isLiving;
+        Name = name;
+        Hp = hp;
+        BaseDmg = baseDmg;
+        this.isLiving = isLiving;
+    }
 
-        public Enemy(string name, int hp, int baseDmg, bool isLiving)
+    public Enemy(string name, int hp, int maxHp, int baseDmg, bool isLiving)
+    {
+        Name = name;
+        Hp = hp;
+        MaxHp = maxHp;
+        BaseDmg = baseDmg;
+        this.isLiving = isLiving;
+    }
+
+    public static class Factory
+    {
+        public static Enemy CreateGoblin()
         {
-            Name = name;
-            Hp = hp;
-            BaseDmg = baseDmg;
-            this.isLiving = isLiving;
+            return new Enemy("Goblin", 100, 10, true);
         }
-        
-        public static class Factory
+
+        public static Enemy CreateSkeleton()
         {
-            public static Enemy CreateGoblin()
-            {
-                return new Enemy("Goblin", 100, 10, true);
-            }
-
-            public static Enemy CreateSkeleton()
-            {
-                return new Enemy("Skeleton", 50, 7, true);
-            }
-
-            public static Enemy CreateBoss()
-            {
-                return new Enemy("Wenceslas Rich", 150, 10, true);
-            } 
+            return new Enemy("Skeleton", 50, 7, true);
         }
-        
-        public void Attack(Player.Player player)
-        {
-            if (this.Hp <= 0)
-            {
-                 isLiving = false;
-                 return;
-            }
 
-            if (player.Hp <= 0)
+        public static Enemy CreateBoss()
+        {
+            return new Enemy("Wenceslas Rich", 150, 150, 10, true);
+        }
+    }
+
+    public void Attack(Player.Player player)
+    {
+        if (this.Hp <= 0)
+        {
+            isLiving = false;
+            return;
+        }
+
+        if (player.Hp <= 0)
+        {
+            player.isLiving = false;
+            return;
+        }
+
+        Random rnd = new Random();
+
+        if (isLiving == true && player.isLiving == true)
+        {
+            int rand = rnd.Next(1, 101);
+            if (rand <= 70)
             {
-                player.isLiving = false;
-                return;
-            }
-            Random rnd = new Random();
-     
-            if (isLiving == true && player.isLiving == true)
-            {
-                int rand = rnd.Next(1, 101);
-                if (rand <= 70)
+                Console.ForegroundColor = ConsoleColor.Red;
+                player.Hp -= BaseDmg;
+                if (player.Hp < 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    player.Hp -= BaseDmg;
-                    Console.WriteLine($"{Name} attacked {player.Name}, remaining hp: {player.Hp}");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    player.Hp = 0;
                 }
-                else
-                {
-                    Console.WriteLine("Player dodged!");
-                }
+
+                Console.WriteLine($"{Name} attacked {player.Name}, remaining hp: {player.Hp}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
-                Console.WriteLine("He dead!");
+                Console.WriteLine("Player dodged!");
             }
-                
-            
         }
-        public override string ToString()
+        else
         {
-            return $"Name: {this.Name}, hp: {Hp}, dmg: {BaseDmg}, Alive: {isLiving}";
+            Console.WriteLine("He dead!");
         }
     }
+
+    public override string ToString()
+    {
+        return $"Name: {this.Name}, hp: {Hp}, dmg: {BaseDmg}, Alive: {isLiving}";
+    }
+}
