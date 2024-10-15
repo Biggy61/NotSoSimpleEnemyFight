@@ -161,7 +161,7 @@ public class Functions
     {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("Congratulations! U have gotten an upgrade.");
-        Console.WriteLine("Select which type of upgrade you want: \n1.Weapons \n2.Heal \n3.Strenght Potion");
+        Console.WriteLine("Select which type of upgrade you want: \n1.Weapons \n2.Heal \n3.Strength Potion");
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         int upgrade = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
         Console.ForegroundColor = ConsoleColor.White;

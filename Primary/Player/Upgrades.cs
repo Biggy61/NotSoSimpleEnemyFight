@@ -51,17 +51,17 @@ public class Upgrades
         int rand = rnd.Next(1, 100);
         if (rand <= 33)
         {
-            player.GetStronger(StrenghtPotions.Redbull);
+            player.GetStronger(StrengthPotions.Redbull);
         }
 
         if (rand is > 33 and <= 66)
         {
-            player.GetStronger(StrenghtPotions.Creatine);
+            player.GetStronger(StrengthPotions.Creatine);
         }
 
         if (rand is > 66 and <= 100)
         {
-            player.GetStronger(StrenghtPotions.Steroids);
+            player.GetStronger(StrengthPotions.Steroids);
         }
     }
 }

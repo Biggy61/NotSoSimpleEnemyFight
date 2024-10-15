@@ -1,6 +1,6 @@
 namespace Primary.Player
 {
-    public enum StrenghtPotions
+    public enum StrengthPotions
     {
         Redbull,
         Creatine,

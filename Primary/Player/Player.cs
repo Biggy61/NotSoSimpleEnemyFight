@@ -95,21 +95,21 @@ namespace Primary.Player
             }
         }
 
-        public void GetStronger(StrenghtPotions potion)
+        public void GetStronger(StrengthPotions potion)
         {
             if (!isLiving) return;
 
             switch (potion)
             {
-                case StrenghtPotions.Redbull:
+                case StrengthPotions.Redbull:
                     Dmg += 5;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Creatine:
+                case StrengthPotions.Creatine:
                     Dmg += 10;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
-                case StrenghtPotions.Steroids:
+                case StrengthPotions.Steroids:
                     Dmg += 20;
                     Console.WriteLine($"{Name} is stronger now, his damage: {Dmg}");
                     break;
